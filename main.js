@@ -31,7 +31,15 @@ function crearCeldas(nFilas, nColumnas)
             var columna = document.createElement('td');
             if(mapa[i][j] == "*")
             {
-                columna.setAttribute("class", "pintado");
+                columna.setAttribute("class", "pared");
+            }
+            if(mapa[i][j] == "o")
+            {
+                columna.setAttribute("class", "inicio");
+            }
+            if(mapa[i][j] == "W")
+            {
+                columna.setAttribute("class", "fin");
             }
             fila.appendChild(columna);
         }
