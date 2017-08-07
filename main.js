@@ -20,6 +20,7 @@ var laberinto = document.getElementById("laberinto");
 var btnIzquierda = document.getElementById("btnIzquierda");
 var btnDerecha = document.getElementById("btnDerecha");
 var btnMover = document.getElementById("btnMover");
+var btnSalida = document.getElementById("btnSalida");
 var actual;
 
 function crearCeldas(nFilas, nColumnas)
@@ -98,6 +99,7 @@ btnMover.onclick = function()
             celdas[x][y].removeChild(celdas[x][y].firstChild);
             alert("Ganaste. Juego terminado");
             crearCeldas(mapa.length, mapa[0].length);
+            clearInterval(timer);
         }
         else if(mapa[x+1][y] == "_")
         {
@@ -118,7 +120,43 @@ btnMover.onclick = function()
         }mapa.length, mapa[0].length
     }
 }
-
+document.onkeypress = derecha;
+function derecha(e)
+{
+    var keyCode = document.all ? e.which : e.keyCode;
+    if(keyCode == 39)
+    {var x = actual.x;
+    var y = actual.y;
+    var imagen = document.createElement("img");
+    if(actual.direccion == "arriba")
+    {
+        imagen.setAttribute("src", "flechaDerecha.png");
+        celdas[x][y].removeChild(celdas[x][y].firstChild);
+        celdas[x][y].appendChild(imagen);
+        actual.direccion = "derecha";
+    }
+    else if(actual.direccion == "derecha")
+    {
+        imagen.setAttribute("src", "flechaAbajo.png");
+        celdas[x][y].removeChild(celdas[x][y].firstChild);
+        celdas[x][y].appendChild(imagen);
+        actual.direccion = "abajo";
+    }
+    else if(actual.direccion == "abajo")
+    {
+        imagen.setAttribute("src", "flechaIzquierda.png");
+        celdas[x][y].removeChild(celdas[x][y].firstChild);
+        celdas[x][y].appendChild(imagen);
+        actual.direccion = "izquierda";
+    }
+    else if(actual.direccion == "izquierda")
+    {
+        imagen.setAttribute("src", "flechaArriba.png");
+        celdas[x][y].removeChild(celdas[x][y].firstChild);
+        celdas[x][y].appendChild(imagen);
+        actual.direccion = "arriba";
+    }}
+}
 btnDerecha.onclick = function()
 {
     var x = actual.x;
@@ -187,4 +225,37 @@ btnIzquierda.onclick = function()
         celdas[x][y].appendChild(imagen);
         actual.direccion = "arriba";
     }
+}
+var timer;
+var x = 0;
+var y = 0;
+var n = 0;
+btnSalida.onclick = function()
+{
+    btnMover.onclick();
+    timer = setInterval(salida, 500);
+};
+function salida()
+{
+    x = actual.x;
+    y = actual.y
+    btnIzquierda.onclick();
+    btnMover.onclick();
+    console.log(x)
+    if(actual.x == x && actual.y == y)
+    {
+        btnDerecha.onclick();
+        btnMover.onclick();
+    }
+    if(actual.x == x && actual.y == y)
+    {
+        btnDerecha.onclick();
+        btnMover.onclick();
+    }
+    if(actual.x == x && actual.y == y)
+    {
+        btnDerecha.onclick();
+        btnMover.onclick();
+    }
+    n++;
 }
