@@ -53,11 +53,12 @@ td.pared
 }
 td.inicio
 {
-    background-image: url(inicio.png);
     background-size: contain;
+    background-repeat: no-repeat;
 }
 td.fin
 {
     background-image: url(final.png);
     background-size: contain;
+    background-repeat: no-repeat;
 }
