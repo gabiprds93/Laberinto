@@ -14,7 +14,6 @@ body
 }
 h1
 {
-    color: chocolate;
     padding-left: 15%;
 }
 input
@@ -24,7 +23,6 @@ input
 }
 div
 {
-    /align-items: center;
     float: right;
 }
 button
@@ -32,8 +30,14 @@ button
     font-size: 20px;
     text-align: center;
 }
+img
+{
+    height: 34px;
+    width: 34px;
+}
 table
 {
+    cellspacing: 0;
     float: left;
     margin-left: 0%;
     text-align: center;
@@ -41,6 +45,8 @@ table
 }
 td
 {
+    background-size: 100%;
+    background-repeat: no-repeat;
     background-color: white;
     width: 40px;
     height: 40px; 
@@ -53,12 +59,10 @@ td.pared
 }
 td.inicio
 {
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-image: url(inicio.png);
 }
 td.fin
 {
     background-image: url(final.png);
-    background-size: contain;
-    background-repeat: no-repeat;
+    
 }

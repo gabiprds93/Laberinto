@@ -13,7 +13,9 @@ var mapa=[
 ];
 var celdas = new Array(mapa.length);
 for (var i=0;i<mapa.length;i++)
-	celdas[i]= new Array(mapa[0].length);
+{
+    celdas[i]= new Array(mapa[0].length);    
+}
 var laberinto = document.getElementById("laberinto");
 var btnIzquierda = document.getElementById("btnIzquierda");
 var btnDerecha = document.getElementById("btnDerecha");
@@ -53,40 +55,29 @@ function crearCeldas(nFilas, nColumnas)
     }
 }
 
-function iniciar()
-{
-    var imagen = document.createElement("img");
-    imagen.setAttribute("src", "inicio.png")
-    imagen.setAttribute("width", "30px")
-    celdas[actual.x][actual.y].appendChild(imagen);
-}
-
 crearCeldas(mapa.length, mapa[0].length);
-iniciar();
 
 btnMover.onclick = function()
 {
     var x = actual.x;
     var y = actual.y;
+    var xInicio = x;
+    var yInicio = y;
     var direccion = actual.direccion;
-    
-    console.log(celdas[actual.x][actual.y].className)
-    if(celdas[actual.x][actual.y].className == "inicio")
-    {var imagen = document.createElement("img");
-    imagen.setAttribute("src", "flechaArriba.png")
-    imagen.setAttribute("width", "30px")
-    celdas[actual.x][actual.y].removeChild(celdas[actual.x][actual.y].firstChild);
-    celdas[actual.x][actual.y].appendChild(imagen);}
-    
+    var imagen = document.createElement("img");
     if(direccion == "arriba")
     {
-        if(mapa[x-1][y] == "_")
+        if(celdas[x][y].className == "inicio")
+        {
+            actual.x = x-1;
+            imagen.setAttribute("src", "flechaArriba.png");
+            celdas[actual.x][y].appendChild(imagen);
+        }
+        else if(mapa[x-1][y] == "_")
         {
             celdas[x][y].removeChild(celdas[x][y].firstChild);
             actual.x = x-1;
-            var imagen = document.createElement("img");
             imagen.setAttribute("src", "flechaArriba.png");
-            imagen.setAttribute("width", "30px")
             celdas[actual.x][y].appendChild(imagen);
         }
     }
@@ -96,21 +87,23 @@ btnMover.onclick = function()
         {
             celdas[x][y].removeChild(celdas[x][y].firstChild);
             actual.y = y+1;
-            var imagen = document.createElement("img");
             imagen.setAttribute("src", "flechaDerecha.png");
-            imagen.setAttribute("width", "30px")
             celdas[x][actual.y].appendChild(imagen);
         }
     }
     else if(direccion == "abajo")
     {
-        if(mapa[x+1][y] == "_")
+        if(celdas[x+1][y].className == "fin")
+        {
+            celdas[x][y].removeChild(celdas[x][y].firstChild);
+            alert("Ganaste. Juego terminado");
+            crearCeldas(mapa.length, mapa[0].length);
+        }
+        else if(mapa[x+1][y] == "_")
         {
             celdas[x][y].removeChild(celdas[x][y].firstChild);
             actual.x = x+1;
-            var imagen = document.createElement("img");
             imagen.setAttribute("src", "flechaAbajo.png");
-            imagen.setAttribute("width", "30px")
             celdas[actual.x][y].appendChild(imagen);
         }
     }
@@ -120,11 +113,9 @@ btnMover.onclick = function()
         {
             celdas[x][y].removeChild(celdas[x][y].firstChild);
             actual.y = y-1;
-            var imagen = document.createElement("img");
             imagen.setAttribute("src", "flechaIzquierda.png");
-            imagen.setAttribute("width", "30px")
             celdas[x][actual.y].appendChild(imagen);
-        }
+        }mapa.length, mapa[0].length
     }
 }
 
@@ -132,39 +123,31 @@ btnDerecha.onclick = function()
 {
     var x = actual.x;
     var y = actual.y;
-        console.log(actual);
+    var imagen = document.createElement("img");
     if(actual.direccion == "arriba")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaDerecha.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "derecha";
     }
     else if(actual.direccion == "derecha")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaAbajo.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "abajo";
     }
     else if(actual.direccion == "abajo")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaIzquierda.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "izquierda";
     }
     else if(actual.direccion == "izquierda")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaArriba.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "arriba";
@@ -175,49 +158,33 @@ btnIzquierda.onclick = function()
 {
     var x = actual.x;
     var y = actual.y;
-        console.log(actual);
+    var imagen = document.createElement("img");
     if(actual.direccion == "arriba")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaIzquierda.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "izquierda";
     }
     else if(actual.direccion == "izquierda")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaAbajo.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "abajo";
     }
     else if(actual.direccion == "abajo")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaDerecha.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "derecha";
     }
     else if(actual.direccion == "derecha")
     {
-        var imagen = document.createElement("img");
         imagen.setAttribute("src", "flechaArriba.png");
-        imagen.setAttribute("width", "30px")
         celdas[x][y].removeChild(celdas[x][y].firstChild);
         celdas[x][y].appendChild(imagen);
         actual.direccion = "arriba";
     }
 }
-//var idActual=actual.td.firstChild.id;
-//idActual++;
-//idActual %=4;
-//actual.td.removeChild(actual.td.firstChild);
-//var img = document.createElement("img");
-//img.src =  "img/"+idActual+".png";
-//img.id= idActual;
-//actual.td.appendChild(img);
