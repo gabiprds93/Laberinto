@@ -120,43 +120,7 @@ btnMover.onclick = function()
         }mapa.length, mapa[0].length
     }
 }
-document.onkeypress = derecha;
-function derecha(e)
-{
-    var keyCode = document.all ? e.which : e.keyCode;
-    if(keyCode == 39)
-    {var x = actual.x;
-    var y = actual.y;
-    var imagen = document.createElement("img");
-    if(actual.direccion == "arriba")
-    {
-        imagen.setAttribute("src", "flechaDerecha.png");
-        celdas[x][y].removeChild(celdas[x][y].firstChild);
-        celdas[x][y].appendChild(imagen);
-        actual.direccion = "derecha";
-    }
-    else if(actual.direccion == "derecha")
-    {
-        imagen.setAttribute("src", "flechaAbajo.png");
-        celdas[x][y].removeChild(celdas[x][y].firstChild);
-        celdas[x][y].appendChild(imagen);
-        actual.direccion = "abajo";
-    }
-    else if(actual.direccion == "abajo")
-    {
-        imagen.setAttribute("src", "flechaIzquierda.png");
-        celdas[x][y].removeChild(celdas[x][y].firstChild);
-        celdas[x][y].appendChild(imagen);
-        actual.direccion = "izquierda";
-    }
-    else if(actual.direccion == "izquierda")
-    {
-        imagen.setAttribute("src", "flechaArriba.png");
-        celdas[x][y].removeChild(celdas[x][y].firstChild);
-        celdas[x][y].appendChild(imagen);
-        actual.direccion = "arriba";
-    }}
-}
+
 btnDerecha.onclick = function()
 {
     var x = actual.x;
@@ -226,15 +190,18 @@ btnIzquierda.onclick = function()
         actual.direccion = "arriba";
     }
 }
+
 var timer;
 var x = 0;
 var y = 0;
 var n = 0;
+
 btnSalida.onclick = function()
 {
     btnMover.onclick();
     timer = setInterval(salida, 500);
-};
+}
+
 function salida()
 {
     x = actual.x;
