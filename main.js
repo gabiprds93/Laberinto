@@ -194,7 +194,6 @@ btnIzquierda.onclick = function()
 var timer;
 var x = 0;
 var y = 0;
-var n = 0;
 
 btnSalida.onclick = function()
 {
@@ -204,11 +203,13 @@ btnSalida.onclick = function()
 
 function salida()
 {
+    //Captura las posiciones del elemento actual
     x = actual.x;
     y = actual.y
+    //Primero va a la izquierda si es que puede
     btnIzquierda.onclick();
     btnMover.onclick();
-    console.log(x)
+    //Si es que no se mueve de su posicion se intenta mover a la derecha
     if(actual.x == x && actual.y == y)
     {
         btnDerecha.onclick();
@@ -224,5 +225,4 @@ function salida()
         btnDerecha.onclick();
         btnMover.onclick();
     }
-    n++;
 }
